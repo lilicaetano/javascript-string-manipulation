@@ -3,10 +3,9 @@ var lf = (strings, ...values) => {
   let string = '';
 
   for (let i=0; i<strings.length; i++) {
-    if (values[i] === undefined || values[i] === null) {
-      string += strings[i];
-    } else {
-      string += strings[i] + values[i];
+    string += transformLineEnding(strings[i], LineEndings.LF);
+    if (values[i] !== undefined && values[i] !== null) {
+      string += transformLineEnding(values[i], LineEndings.LF);
     }
   }
 
