@@ -1,5 +1,17 @@
 // Create a tagged template lf`...` that formats text using LF line endings.
-var lf = () => {};
+var lf = (strings, ...values) => {
+  let string = '';
+
+  for (let i=0; i<strings.length; i++) {
+    if (values[i] === undefined || values[i] === null) {
+      string += strings[i];
+    } else {
+      string += strings[i] + values[i];
+    }
+  }
+
+  return string;
+};
 
 // Create a tagged template cr`...` that formats text using CR line endings.
 var cr = () => {};
