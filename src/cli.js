@@ -1,10 +1,6 @@
-var index = require("./index.js");
-var LineEndings = index.LineEndings;
-var transformLineEnding = index.transformLineEnding;
+const { LineEndings, transformLineEnding } = require("./index.js");
 
-var helpText = require("./info.js");
-var help = helpText.help;
-var usage = helpText.usage;
+const { help, usage } = require("./info.js");
 
 // Display help text and exit if when someone passes `-h` or `--help`.
 if (process.argv.includes("-h") || process.argv.includes("--help")) {
