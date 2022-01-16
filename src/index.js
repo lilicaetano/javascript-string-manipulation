@@ -1,28 +1,31 @@
 
+function createTemplateTagCRLFConverter(lineEnding) {
+  return (strings, ...values) => {
+    let string = '';
 
-// Create a tagged template lf`...` that formats text using LF line endings.
-var lf = (strings, ...values) => {
-  let string = '';
-
-  for (let i=0; i<strings.length; i++) {
-    string += transformLineEnding(strings[i], LineEndings.LF);
-    if (values[i] !== undefined && values[i] !== null) {
-      if (Object.getOwnPropertySymbols(values[i]).includes(disableConverter)) {
-        string += values[i];
-      } else {
-        string += transformLineEnding(values[i], LineEndings.LF); 
+    for (let i=0; i<strings.length; i++) {
+      string += transformLineEnding(strings[i], lineEnding);
+      if (values[i] !== undefined && values[i] !== null) {
+        if (Object.getOwnPropertySymbols(values[i]).includes(disableConverter)) {
+          string += values[i];
+        } else {
+          string += transformLineEnding(values[i], lineEnding); 
+        }
       }
     }
-  }
 
-  return string;
-};
+    return string;
+  };
+}
+
+// Create a tagged template lf`...` that formats text using LF line endings.
+var lf = createTemplateTagCRLFConverter(LineEndings.LF);
 
 // Create a tagged template cr`...` that formats text using CR line endings.
-var cr = () => {};
+var cr = createTemplateTagCRLFConverter(LineEndings.CR);
 
 // Create a tagged template crlf`...` that formats text using CRLF line endings.
-var crlf = () => {};
+var crlf = createTemplateTagCRLFConverter(LineEndings.CRLF);
 
 const transformLineEnding = (string, lineEnding) => {
   const { replaceCRLF, replaceCR, replaceLF} = LineEndingReplacements;
