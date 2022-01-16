@@ -18,14 +18,20 @@ function createTemplateTagCRLFConverter(lineEnding) {
   };
 }
 
+const LineEndings = {
+  CR: Symbol("CR"),
+  LF: Symbol("LF"),
+  CRLF: Symbol("CRLF")
+};
+
 // Create a tagged template lf`...` that formats text using LF line endings.
-var lf = createTemplateTagCRLFConverter(LineEndings.LF);
+const lf = createTemplateTagCRLFConverter(LineEndings.LF);
 
 // Create a tagged template cr`...` that formats text using CR line endings.
-var cr = createTemplateTagCRLFConverter(LineEndings.CR);
+const cr = createTemplateTagCRLFConverter(LineEndings.CR);
 
 // Create a tagged template crlf`...` that formats text using CRLF line endings.
-var crlf = createTemplateTagCRLFConverter(LineEndings.CRLF);
+const crlf = createTemplateTagCRLFConverter(LineEndings.CRLF);
 
 const transformLineEnding = (string, lineEnding) => {
   const { replaceCRLF, replaceCR, replaceLF} = LineEndingReplacements;
@@ -46,12 +52,6 @@ const transformLineEnding = (string, lineEnding) => {
 };
 
 const disableConverter = Symbol.for("crlf-converter-disable");
-
-const LineEndings = {
-  CR: Symbol("CR"),
-  LF: Symbol("LF"),
-  CRLF: Symbol("CRLF")
-};
 
 const LineEndingReplacements = {
   replaceCR: (string, newEnding) =>
