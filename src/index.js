@@ -1,3 +1,5 @@
+
+
 // Create a tagged template lf`...` that formats text using LF line endings.
 var lf = (strings, ...values) => {
   let string = '';
@@ -5,7 +7,7 @@ var lf = (strings, ...values) => {
   for (let i=0; i<strings.length; i++) {
     string += transformLineEnding(strings[i], LineEndings.LF);
     if (values[i] !== undefined && values[i] !== null) {
-      if (disableConverter === values[i]) {
+      if (Object.getOwnPropertySymbols(values[i]).includes(disableConverter)) {
         string += values[i];
       } else {
         string += transformLineEnding(values[i], LineEndings.LF); 
